@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardioBrain — Download</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #30363d;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --accent:    #4ade80;
+      --accent-dim:#4ade8022;
+      --success:   #4ade80;
+      --error:     #f85149;
+      --radius:    6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1rem 4rem;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      width: 100%;
+      max-width: 720px;
+      padding: 3.5rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────── */
+    main {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── ABOUT SECTION ───────────────────────────────────── */
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .about p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .about p + p {
+      margin-top: 0.75rem;
+    }
+
+    .about a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .about a:hover {
+      text-decoration: underline;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── FEATURES ────────────────────────────────────────── */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 480px) {
+      .features { grid-template-columns: 1fr; }
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+    }
+
+    .feature-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── FORM CARD ───────────────────────────────────────── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .form-intro {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.6rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    input.invalid {
+      border-color: var(--error);
+    }
+
+    .field-error {
+      font-size: 0.72rem;
+      color: var(--error);
+      min-height: 1em;
+    }
+
+    /* ── DOWNLOAD BUTTON ─────────────────────────────────── */
+    .download-wrap {
+      margin-top: 1.5rem;
+    }
+
+    /* ── OS SELECTOR ─────────────────────────────────────── */
+    .os-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .os-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .os-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .os-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #0d1117;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+      pointer-events: none;
+      opacity: 0.35;
+      filter: grayscale(0.4);
+      user-select: none;
+    }
+
+    .btn-download.enabled {
+      pointer-events: auto;
+      opacity: 1;
+      filter: none;
+    }
+
+    .btn-download.enabled:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .btn-download svg {
+      flex-shrink: 0;
+    }
+
+    .download-hint {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── CITATION ────────────────────────────────────────── */
+    .citation-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+    }
+
+    .citation-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+      word-break: break-word;
+    }
+
+    .citation-text em { color: var(--text); font-style: italic; }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    footer span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.75rem;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── SIGNAL CANVAS ───────────────────────────────────── */
+    .signal-wrap {
+      position: relative;
+      margin-top: 1.8rem;
+      height: 56px;
+      overflow: hidden;
+    }
+
+    #signal-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="eyebrow">Signal Processing · Neuroscience</p>
+    <h1 style="text-align: center">CardioBrain</h1>
+    <p class="tagline">
+      A freely available software for assessing dynamic cerebral autoregulation
+      via Transfer Function Analysis (TFA) on continuously recorded blood pressure (ABP) and cerebral blood flow (CBF) signals.
+    </p>
+    <div class="signal-wrap">
+      <canvas id="signal-canvas"></canvas>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- About -->
+    <section class="about">
+      <p class="section-title">About</p>
+      <p>
+        Cerebral autoregulation (CA) is a critical mechanism maintaining cerebral
+        blood flow relatively stable despite arterial blood pressure fluctuations.
+        CardioBrain performs spectral density and cross-spectral analysis via the
+        Welch method, computing gain, phase, and coherence across frequency bands.
+      </p>
+      <p>
+        The software includes tools to address signal misalignments (temporal shift),
+        and enforces adherence to recommended standards for TFA analysis. No
+        programming skills required.
+      </p>
+      <p>
+        Published preprint:
+        <a href="https://doi.org/10.1101/2024.10.21.24315862" target="_blank" rel="noopener">
+          doi:10.1101/2024.10.21.24315862
+        </a>
+        — Pecanha, Bartels, Rodrigues · medRxiv 2024
+      </p>
+    </section>
+
+    <!-- Download form -->
+    <section class="form-card">
+      <p class="section-title">Download</p>
+      <p class="form-intro">
+        To download CardioBrain, please fill in the fields below.
+        This helps us track usage and contact you about updates.
+      </p>
+
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" placeholder="e.g. Maria Santos" autocomplete="name" />
+        <span class="field-error" id="name-error"></span>
+      </div>
+
+      <div class="field">
+        <label for="institution">Institution</label>
+        <input type="text" id="institution" placeholder="e.g. University of Rio de Janeiro" autocomplete="organization" />
+        <span class="field-error" id="institution-error"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="e.g. maria@usp.br" autocomplete="email" />
+        <span class="field-error" id="email-error"></span>
+      </div>
+
+      <div class="download-wrap">
+
+        <!-- =====================================================
+             GOOGLE DRIVE LINKS — substitua os valores abaixo
+             ===================================================== -->
+        <div id="os-links" style="display:none"
+          data-windows="YOUR_WINDOWS_DRIVE_LINK"
+          data-linux="YOUR_LINUX_DRIVE_LINK"
+          data-macos="YOUR_MACOS_DRIVE_LINK">
+        </div>
+        <!-- ===================================================== -->
+
+        <div class="os-selector">
+          <button class="os-btn active" data-os="windows" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8"/></svg>
+            Windows
+          </button>
+          <button class="os-btn" data-os="linux" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021C7.576.326 3.609 3.824 2.98 8.6 2.357 13.37 5.348 18.044 10 19.686v.003c.454.139.814.396 1.097.76a9.154 9.154 0 0 1 .738 1.395c.171.392.286.802.286 1.156a4 4 0 0 1-4 4 4 4 0 0 1-4-4 .5.5 0 0 0-1 0 5 5 0 0 0 5 5 5 5 0 0 0 5-5c0-.622-.161-1.218-.393-1.771a10.166 10.166 0 0 0-.82-1.545 3.934 3.934 0 0 0-1.573-1.37C8.938 17.116 6.5 13.538 7.027 9.6c.527-3.938 3.855-6.874 7.799-7.066C19.003 2.33 22.5 5.9 22.5 10.5c0 2.42-1.017 4.6-2.645 6.165a.5.5 0 0 0 .69.722C22.35 15.647 23.5 13.19 23.5 10.5 23.5 5.253 19.536 1.14 14.504.021A8.875 8.875 0 0 0 12.504 0z"/></svg>
+            Linux
+          </button>
+          <button class="os-btn" data-os="macos" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            macOS
+          </button>
+        </div>
+
+        <a
+          id="download-btn"
+          class="btn-download"
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span id="download-label">Download for Windows</span>
+        </a>
+        <p class="download-hint">
+          Fill in all fields to unlock the download button.<br>
+          Hosted on Google Drive.
+        </p>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section>
+      <p class="section-title">How to cite</p>
+      <div class="citation-block">
+        <p class="citation-text">
+          Pecanha T, Bartels R, Rodrigues GD.
+          <em>CardioBrain: A Novel User-Friendly Software for Assessing Dynamic
+          Cerebral Autoregulation and Cardiovascular Interactions.</em>
+          medRxiv 2024.10.21.24315862.
+          doi:<a href="https://doi.org/10.1101/2024.10.21.24315862" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">10.1101/2024.10.21.24315862</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>CardioBrain · Pecanha, Bartels &amp; Rodrigues · 2024</span>
+    <a href="https://doi.org/10.1101/2024.10.21.24315862" target="_blank" rel="noopener">Read the preprint →</a>
+  </footer>
+
+  <script>
+    const fields = {
+      name:        document.getElementById('name'),
+      institution: document.getElementById('institution'),
+      email:       document.getElementById('email'),
+    };
+    const errors = {
+      name:        document.getElementById('name-error'),
+      institution: document.getElementById('institution-error'),
+      email:       document.getElementById('email-error'),
+    };
+    const btn        = document.getElementById('download-btn');
+    const btnLabel   = document.getElementById('download-label');
+    const linksEl    = document.getElementById('os-links');
+    const osBtns     = document.querySelectorAll('.os-btn');
+
+    const links = {
+      windows: linksEl.dataset.windows,
+      linux:   linksEl.dataset.linux,
+      macos:   linksEl.dataset.macos,
+    };
+
+    const osNames = { windows: 'Windows', linux: 'Linux', macos: 'macOS' };
+    let selectedOS = 'windows';
+
+    function setOS(os) {
+      selectedOS = os;
+      osBtns.forEach(b => b.classList.toggle('active', b.dataset.os === os));
+      btnLabel.textContent = 'Download for ' + osNames[os];
+      btn.href = links[os];
+    }
+
+    osBtns.forEach(b => b.addEventListener('click', () => setOS(b.dataset.os)));
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+    }
+
+    function validate(id) {
+      const v = fields[id].value.trim();
+      let msg = '';
+      if (id === 'email') {
+        if (!v) msg = 'Email is required.';
+        else if (!isValidEmail(v)) msg = 'Enter a valid email address.';
+      } else {
+        if (!v) msg = id === 'name' ? 'Name is required.' : 'Institution is required.';
+      }
+      errors[id].textContent = msg;
+      fields[id].classList.toggle('invalid', !!msg);
+      return !msg;
+    }
+
+    function checkAll() {
+      const ok =
+        fields.name.value.trim() &&
+        fields.institution.value.trim() &&
+        isValidEmail(fields.email.value.trim());
+      btn.classList.toggle('enabled', !!ok);
+    }
+
+    Object.keys(fields).forEach(id => {
+      fields[id].addEventListener('input', () => {
+        if (fields[id].classList.contains('invalid')) validate(id);
+        checkAll();
+      });
+      fields[id].addEventListener('blur', () => {
+        validate(id);
+        checkAll();
+      });
+    });
+  </script>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById('signal-canvas');
+      const wrap   = canvas.parentElement;
+      let W, H, offset = 0;
+
+      function resize() {
+        W = wrap.clientWidth;
+        H = wrap.clientHeight;
+        canvas.width  = W;
+        canvas.height = H;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const ctx = canvas.getContext('2d');
+
+      /* ABP-like waveform: sharp systolic peak + dicrotic notch */
+      function abpSample(t) {
+        const cycle = t % 1;
+        if (cycle < 0.15) {
+          return -Math.pow(Math.sin(cycle / 0.15 * Math.PI), 2) * 0.9;
+        } else if (cycle < 0.25) {
+          const p = (cycle - 0.15) / 0.1;
+          return -0.18 * Math.sin(p * Math.PI);
+        } else {
+          return -0.06 * Math.sin(((cycle - 0.25) / 0.75) * Math.PI);
+        }
+      }
+
+      /* CBF-like: slower, rounder, slightly delayed */
+      function cbfSample(t) {
+        const delayed = (t + 0.85) % 1;
+        return -Math.sin(delayed * 2 * Math.PI) * 0.38
+               - Math.sin(delayed * 4 * Math.PI) * 0.12;
+      }
+
+      const GREEN  = '#4ade80';
+      const BLUE   = '#60a5fa';
+      const SPEED  = 0.0006;
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        const midY = H / 2;
+        const scaleABP = H * 0.38;
+        const scaleCBF = H * 0.28;
+        const cyclesVisible = 3.5;
+
+        /* fade edges */
+        const fadeW = W * 0.08;
+        const grad = ctx.createLinearGradient(0, 0, W, 0);
+        grad.addColorStop(0,          'rgba(13,17,23,1)');
+        grad.addColorStop(fadeW/W,    'rgba(13,17,23,0)');
+        grad.addColorStop(1-fadeW/W,  'rgba(13,17,23,0)');
+        grad.addColorStop(1,          'rgba(13,17,23,1)');
+
+        /* draw ABP */
+        ctx.beginPath();
+        for (let x = 0; x <= W; x++) {
+          const t = (x / W) * cyclesVisible + offset;
+          const y = midY + abpSample(t) * scaleABP;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = GREEN;
+        ctx.lineWidth   = 1.5;
+        ctx.globalAlpha = 0.85;
+        ctx.stroke();
+
+        /* draw CBF */
+        ctx.beginPath();
+        for (let x = 0; x <= W; x++) {
+          const t = (x / W) * cyclesVisible + offset;
+          const y = midY + cbfSample(t) * scaleCBF;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = BLUE;
+        ctx.lineWidth   = 1.5;
+        ctx.globalAlpha = 0.55;
+        ctx.stroke();
+
+        /* mask edges */
+        ctx.globalAlpha = 1;
+        ctx.fillStyle   = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        offset += SPEED;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
+
+</body>
+</html>
