@@ -515,7 +515,10 @@
       osBtns.forEach(b => b.classList.toggle('active', b.dataset.os === os));
       btnLabel.textContent = 'Download for ' + osNames[os];
       btn.href = links[os];
+      btn.target = '_blank';
     }
+
+    setOS('windows');
 
     osBtns.forEach(b => b.addEventListener('click', () => setOS(b.dataset.os)));
 
