@@ -521,6 +521,25 @@
     setOS('windows');
 
     osBtns.forEach(b => b.addEventListener('click', () => setOS(b.dataset.os)));
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const ok = ['name', 'institution', 'email'].map(validate).every(Boolean);
+      if (!ok) return;
+
+      const formData = new FormData();
+      formData.append('entry.1128346983', fields.name.value.trim());
+      formData.append('entry.208592166', fields.institution.value.trim());
+      formData.append('entry.1814623470', fields.email.value.trim());
+
+      fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScm9O0O2bK1l40VxYCW7T2Tw-kbMd9rjqESvVWXOQxIcgRVlA/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData,
+      }).catch(() => {}); // silencia erro de CORS — o submit acontece mesmo assim
+
+      window.open(links[selectedOS], '_blank');
+    });
 
     function isValidEmail(v) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
