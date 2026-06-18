@@ -531,6 +531,7 @@
       formData.append('entry.1128346983', fields.name.value.trim());
       formData.append('entry.208592166', fields.institution.value.trim());
       formData.append('entry.1814623470', fields.email.value.trim());
+      formData.append('entry.531214557', selectedOS.trim());
 
       fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScm9O0O2bK1l40VxYCW7T2Tw-kbMd9rjqESvVWXOQxIcgRVlA/formResponse', {
         method: 'POST',
