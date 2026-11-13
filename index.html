@@ -212,6 +212,47 @@
       min-height: 1em;
     }
 
+    /* ── VERSION BADGE ───────────────────────────────────── */
+    .form-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-header .section-title {
+      margin-bottom: 0;
+    }
+
+    .release-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .release-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .version-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: 0.15rem 0.6rem;
+      white-space: nowrap;
+    }
+
     /* ── DOWNLOAD BUTTON ─────────────────────────────────── */
     .download-wrap {
       margin-top: 1.5rem;
@@ -398,7 +439,13 @@
 
     <!-- Download form -->
     <section class="form-card">
-      <p class="section-title">Download</p>
+      <div class="form-header">
+        <p class="section-title">Download</p>
+        <div class="release-meta">
+          <span class="version-badge" id="version-badge">v1.4.0</span>
+          <time class="release-date" id="release-date" datetime="2026-11-13">updated 2026-08-11</time>
+        </div>
+      </div>
       <p class="form-intro">
         To download CardioBrain, please fill in the fields below.
         This helps us track usage and contact you about updates.
